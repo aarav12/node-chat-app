@@ -20,17 +20,23 @@ io.on('connection',(socket)=>{
 
 
 
-socket.emit('newMessage',{
-  from:'john',
-  text:'see you then',
-  createdAt:123123
-});
+//socket.emit('newMessage',{
+  //from:'john',
+  //text:'see you then',
+  //createdAt:123123
+//});
 
 
 
 
 socket.on('createMessage',(message)=>{
   console.log(message);
+
+  io.emit('newMessage',{
+    from:message.from,
+    text:message.text,
+    createdAt:new Date().getTime()
+  })
 })
 
   socket.on('disconnect',()=>{
